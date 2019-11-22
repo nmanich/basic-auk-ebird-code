@@ -14,7 +14,20 @@ ebird_data <- auk_ebd("ebd_US-WI_201412_201912_relAug-2019.txt") %>% #point to i
   # 4. read text file into r data frame
   read_ebd()
 
--------------------------------------------
+----------------------------------------------------
+#pulls out non-portal checklists (not a complete list of other portals right now)
+
+library(auk)
+
+output_file <- "allnonportalfromR.txt" #name your output file
+ebird_data <- auk_ebd("ebd_US-WI_201801_201812_relSep-2019.txt") %>% 
+  
+  auk_project(project = c("EBIRD_MEX", "EBIRD_ME", "EBIRD_VINS", "EBIRD_PNW", "EBIRD_BCH", "EBIRD_NH", "EBIRD_ARG", "EBIRD_PR", "EBIRD_TX", "EBIRD_BRA", "EBIRD_PA", "EBIRD_VA", "EBIRD_QC", "EBIRD_CAMERICA", "EBIRD_MA", "EBIRD_CAN", "EBIRD_MO", "EBIRD_AK", "EBIRD_TWN", "EBIRD_WI", "EBIRD"))  %>%
+  auk_filter(file = output_file) %>% 
+  
+  read_ebd()
+
+------------------------------------------
 #this is how it works with pipes, probably a better way to make the dataframe
 
 library(auk)
