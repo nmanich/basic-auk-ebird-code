@@ -55,3 +55,18 @@ ebird_data <- auk_ebd("ebd_US-WI_201412_201912_relAug-2019.txt") %>%
   auk_filter(file = output_file) %>% 
 
   read_ebd()
+----------------------------------------------------
+
+
+#this finds atlas portal observations for the wrong states, in this case, all states but WI
+#although you'd need to download the entire US database which is seeming to be prohibitively large
+library(auk)
+
+output_file <- "atlasoutofstate.txt" #name your output file
+ebird_data <- auk_ebd("ebd_US_relAug-2019.txt") %>% 
+  
+  auk_project(project = "EBIRD_ATL_WI")  %>%
+  auk_state(state = c("US-AL",	"US-AK",	"US-AZ",	"US-AR",	"US-CA",	"US-CO",	"US-CT",	"US-DE",	"US-DC",	"US-FL",	"US-GA",	"US-HI",	"US-ID",	"US-IL",	"US-IN",	"US-IA",	"US-KS",	"US-KY",	"US-LA",	"US-ME",	"US-MD",	"US-MA",	"US-MI",	"US-MN",	"US-MS",	"US-MO",	"US-MT",	"US-NE",	"US-NV",	"US-NH",	"US-NJ",	"US-NM",	"US-NY",	"US-NC",	"US-ND",	"US-OH",	"US-OK",	"US-OR",	"US-PA",	"US-PR",	"US-RI",	"US-SC",	"US-SD",	"US-TN",	"US-TX",	"US-UT",	"US-VT",	"US-VA",	"US-VI",	"US-WA",	"US-WV",	"US-WY")) %>%
+  auk_filter(file = output_file) %>% 
+  
+  read_ebd(unique = FALSE)
